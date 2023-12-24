@@ -1,3 +1,4 @@
+// LocationSelector.js
 import React, { useState, useEffect } from 'react';
 
 const LocationSelector = () => {
@@ -72,7 +73,7 @@ const LocationSelector = () => {
       <h1>Location Selector</h1>
       <div>
         <label>Select Country:</label>
-        <select value={selectedCountry} onChange={handleCountryChange}>
+        <select value={selectedCountry} onChange={handleCountryChange} aria-label="Select Country">
           <option value="">-- Select Country --</option>
           {countries.map((country) => (
             <option key={country} value={country}>
@@ -85,7 +86,7 @@ const LocationSelector = () => {
         <>
           <div>
             <label>Select State:</label>
-            <select value={selectedState} onChange={handleStateChange}>
+            <select value={selectedState} onChange={handleStateChange} aria-label="Select State">
               <option value="">-- Select State --</option>
               {states.map((state) => (
                 <option key={state} value={state}>
@@ -96,7 +97,7 @@ const LocationSelector = () => {
           </div>
           <div>
             <label>Select City:</label>
-            <select value={selectedCity} onChange={handleCityChange} disabled={!selectedState}>
+            <select value={selectedCity} onChange={handleCityChange} aria-label="Select City" disabled={!selectedState}>
               <option value="">-- Select City --</option>
               {cities.map((city) => (
                 <option key={city} value={city}>
