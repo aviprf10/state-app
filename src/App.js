@@ -13,13 +13,6 @@ const LocationSelector = () => {
     fetchCountries();
   }, []);
 
-  useEffect(() => {
-    // Fetch states when selectedCountry changes
-    if (selectedCountry) {
-      fetchStates(selectedCountry);
-    }
-  }, [selectedCountry]);
-
   const fetchCountries = async () => {
     try {
       const response = await fetch('https://crio-location-selector.onrender.com/countries');
@@ -55,15 +48,20 @@ const LocationSelector = () => {
     setSelectedCountry(countryName);
     setSelectedState('');
     setSelectedCity('');
+
+    // Fetch states for the selected country
+    fetchStates(countryName);
   };
 
   const handleStateChange = (e) => {
     const stateName = e.target.value;
     setSelectedState(stateName);
     setSelectedCity('');
+  
+    // Fetch cities for the selected country and state
     fetchCities(selectedCountry, stateName);
   };
-
+  
   const handleCityChange = (e) => {
     const cityName = e.target.value;
     setSelectedCity(cityName);
@@ -107,11 +105,6 @@ const LocationSelector = () => {
               ))}
             </select>
           </div>
-          {selectedCity && (
-            <div>
-              <p>You Selected {selectedCity}, {selectedState}, {selectedCountry}</p>
-            </div>
-          )}
         </>
       )}
     </div>
