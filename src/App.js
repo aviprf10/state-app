@@ -1,4 +1,3 @@
-// LocationSelector.js
 import React, { useState, useEffect } from 'react';
 
 const LocationSelector = () => {
@@ -13,6 +12,13 @@ const LocationSelector = () => {
     // Fetch countries on initial render
     fetchCountries();
   }, []);
+
+  useEffect(() => {
+    // Fetch states when selectedCountry changes
+    if (selectedCountry) {
+      fetchStates(selectedCountry);
+    }
+  }, [selectedCountry]);
 
   const fetchCountries = async () => {
     try {
@@ -49,17 +55,12 @@ const LocationSelector = () => {
     setSelectedCountry(countryName);
     setSelectedState('');
     setSelectedCity('');
-
-    // Fetch states for the selected country
-    fetchStates(countryName);
   };
 
   const handleStateChange = (e) => {
     const stateName = e.target.value;
     setSelectedState(stateName);
     setSelectedCity('');
-
-    // Fetch cities for the selected country and state
     fetchCities(selectedCountry, stateName);
   };
 
@@ -73,7 +74,7 @@ const LocationSelector = () => {
       <h1>Location Selector</h1>
       <div>
         <label>Select Country:</label>
-        <select value={selectedCountry} onChange={handleCountryChange} aria-label="Select Country">
+        <select value={selectedCountry} onChange={handleCountryChange}>
           <option value="">-- Select Country --</option>
           {countries.map((country) => (
             <option key={country} value={country}>
@@ -86,7 +87,7 @@ const LocationSelector = () => {
         <>
           <div>
             <label>Select State:</label>
-            <select value={selectedState} onChange={handleStateChange} aria-label="Select State">
+            <select value={selectedState} onChange={handleStateChange}>
               <option value="">-- Select State --</option>
               {states.map((state) => (
                 <option key={state} value={state}>
@@ -97,7 +98,7 @@ const LocationSelector = () => {
           </div>
           <div>
             <label>Select City:</label>
-            <select value={selectedCity} onChange={handleCityChange} aria-label="Select City" disabled={!selectedState}>
+            <select value={selectedCity} onChange={handleCityChange} disabled={!selectedState}>
               <option value="">-- Select City --</option>
               {cities.map((city) => (
                 <option key={city} value={city}>
