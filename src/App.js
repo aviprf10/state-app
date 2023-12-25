@@ -54,18 +54,18 @@ const LocationSelector = () => {
   };
 
   const handleStateChange = (e) => {
-    const stateName = e.target.value;
-    setSelectedState(stateName);
-    setSelectedCity('');
-  
-    // Fetch cities for the selected country and state
-    fetchCities(selectedCountry, stateName);
-  };
-  
-  const handleCityChange = (e) => {
-    const cityName = e.target.value;
-    setSelectedCity(cityName);
-  };
+  const stateName = e.target.value;
+  setSelectedState(stateName);
+  setSelectedCity('');
+
+  // Fetch cities for the selected country and state
+  fetchCities(selectedCountry, stateName);
+};
+
+const handleCityChange = (e) => {
+  const cityName = e.target.value;
+  setSelectedCity(cityName);
+};
 
   return (
     <div>
