@@ -7,6 +7,7 @@ const LocationSelector = () => {
   const [selectedState, setSelectedState] = useState('');
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState('');
 
   useEffect(() => {
     // Fetch countries on initial render
@@ -48,7 +49,8 @@ const LocationSelector = () => {
     setSelectedCountry(countryName);
     setSelectedState('');
     setSelectedCity('');
-
+    setSelectedLocation('');
+    
     // Fetch states for the selected country
     fetchStates(countryName);
   };
@@ -57,7 +59,8 @@ const LocationSelector = () => {
     const stateName = e.target.value;
     setSelectedState(stateName);
     setSelectedCity('');
-
+    setSelectedLocation('');
+    
     // Fetch cities for the selected country and state
     fetchCities(selectedCountry, stateName);
   };
@@ -65,6 +68,7 @@ const LocationSelector = () => {
   const handleCityChange = (e) => {
     const cityName = e.target.value;
     setSelectedCity(cityName);
+    setSelectedLocation(`You Selected ${cityName}, ${selectedState}, ${selectedCountry}`);
   };
 
   return (
@@ -94,17 +98,26 @@ const LocationSelector = () => {
               ))}
             </select>
           </div>
-          <div>
-            <label>Select City:</label>
-            <select value={selectedCity} onChange={handleCityChange} disabled={!selectedState}>
-              <option value="">-- Select City --</option>
-              {cities.map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
-          </div>
+          {selectedState && (
+            <>
+              <div>
+                <label>Select City:</label>
+                <select value={selectedCity} onChange={handleCityChange}>
+                  <option value="">-- Select City --</option>
+                  {cities.map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {selectedLocation && (
+                <div>
+                  <p>{selectedLocation}</p>
+                </div>
+              )}
+            </>
+          )}
         </>
       )}
     </div>
