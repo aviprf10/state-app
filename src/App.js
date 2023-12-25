@@ -50,7 +50,7 @@ const LocationSelector = () => {
     setSelectedState('');
     setSelectedCity('');
     setSelectedLocation('');
-
+    
     // Fetch states for the selected country
     fetchStates(countryName);
   };
@@ -60,7 +60,7 @@ const LocationSelector = () => {
     setSelectedState(stateName);
     setSelectedCity('');
     setSelectedLocation('');
-
+    
     // Fetch cities for the selected country and state
     fetchCities(selectedCountry, stateName);
   };
@@ -76,7 +76,7 @@ const LocationSelector = () => {
       <h1>Location Selector</h1>
       <div>
         <label>Select Country:</label>
-        <select data-testid="select-country" value={selectedCountry} onChange={handleCountryChange}>
+        <select value={selectedCountry} onChange={handleCountryChange}>
           <option value="">-- Select Country --</option>
           {countries.map((country) => (
             <option key={country} value={country}>
@@ -89,7 +89,7 @@ const LocationSelector = () => {
         <>
           <div>
             <label>Select State:</label>
-            <select data-testid="select-state" value={selectedState} onChange={handleStateChange}>
+            <select value={selectedState} onChange={handleStateChange}>
               <option value="">-- Select State --</option>
               {states.map((state) => (
                 <option key={state} value={state}>
@@ -102,7 +102,7 @@ const LocationSelector = () => {
             <>
               <div>
                 <label>Select City:</label>
-                <select data-testid="select-city" value={selectedCity} onChange={handleCityChange}>
+                <select value={selectedCity} onChange={handleCityChange}>
                   <option value="">-- Select City --</option>
                   {cities.map((city) => (
                     <option key={city} value={city}>
@@ -112,7 +112,7 @@ const LocationSelector = () => {
                 </select>
               </div>
               {selectedLocation && (
-                <div data-testid="selected-location">
+                <div>
                   <p>{selectedLocation}</p>
                 </div>
               )}
