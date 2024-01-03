@@ -73,7 +73,7 @@ const LocationSelector = () => {
 
   return (
     <div>
-      <h1>Location Selector</h1>
+      <h1>Select Location</h1>
       <div>
         <label>Select Country:</label>
         <select value={selectedCountry} onChange={handleCountryChange}>
